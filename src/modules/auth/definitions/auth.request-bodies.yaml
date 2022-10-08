@@ -1,0 +1,117 @@
+components:
+  requestBodies:
+    LoginRequestBody:
+      description: Body needed to login
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/LoginRequestBody"
+    ForgotPasswordRequestBody:
+      description: Body needed to get a password reset token
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ForgotPasswordRequestBody"
+    ResetPasswordRequestBody:
+      description: Body needed to reset the password
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResetPasswordRequestBody"
+  schemas:
+    LoginRequestBody:
+      type: object
+      required:
+        - email
+        - password
+        - rememberMe
+      properties:
+        email:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email"
+        password:
+          type: string
+          x-faker: internet.password
+        rememberMe:
+          type: boolean
+    ForgotPasswordRequestBody:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email"
+    ResetPasswordRequestBody:
+      type: object
+      required:
+        - email
+        - token
+        - password
+        - confirmedPassword
+      properties:
+        email:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email"
+        token:
+          type: string
+        password:
+          type: string
+        confirmedPassword:
+          type: string
+    ForgotPasswordCreate:
+      type: object
+      required:
+        - email
+        - token
+      properties:
+        email:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email"
+        token:
+          description: 6 digits string
+          type: string
+    ForgotPasswordSearch:
+      allOf:
+        - $ref: "#/components/schemas/ForgotPasswordPaginationQuery"
+        - $ref: "#/components/schemas/ForgotPasswordConditionQuery"
+    ForgotPasswordPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: "#/components/schemas/ForgotPasswordPagination"
+    ForgotPasswordPagination:
+      $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Pagination
+    ForgotPasswordConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/ForgotPasswordConditionFields"
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/ForgotPasswordConditionFields"
+    ForgotPasswordConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+        token:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        email:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        date:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition

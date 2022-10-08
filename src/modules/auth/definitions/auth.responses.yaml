@@ -1,0 +1,77 @@
+components:
+  responses:
+    LoginResponse:
+      description: Returns a JWT Token and a Refresh Token on a successfull login
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginResponse'
+
+    RefreshResponse:
+      description: Returns a new JWT Token to refresh the old one
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RefreshResponse'
+
+    ForgotPasswordResponse:
+      description: Returns a token to reset a password
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ForgotPasswordResponse'
+
+    ResetPasswordResponse:
+      description: Returns a ResultHandler boolean
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResetPasswordResponse'
+  schemas:
+    LoginResponse:
+      allOf:
+        - $ref: '../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: object
+              required:
+                - jwt
+                - refreshToken
+              properties:
+                jwt:
+                  type: string
+                refreshToken:
+                  type: string
+
+    RefreshResponse:
+      allOf:
+        - $ref: '../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: object
+              required:
+                - jwt
+                - refreshToken
+              properties:
+                jwt:
+                  type: string
+                refreshToken:
+                  type: string
+
+    ForgotPasswordResponse:
+      allOf:
+        - $ref: '../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: "./auth.schemas.yaml#/components/schemas/ForgotPassword"
+
+    ResetPasswordResponse:
+      allOf:
+        - $ref: '../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: boolean

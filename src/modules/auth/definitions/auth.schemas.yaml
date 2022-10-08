@@ -1,0 +1,20 @@
+configs:
+  moduleName: Auth
+components:
+  schemas:
+    ForgotPassword:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BaseModel
+        - type: object
+          required:
+            - token
+            - email
+          properties:
+            token:
+              description: 6 digits string
+              type: string
+            email:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email
+            date:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+

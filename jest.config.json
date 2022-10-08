@@ -1,0 +1,33 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t)sx?$": ["@swc/jest"]
+  },
+  "testEnvironment": "node",
+  "modulePathIgnorePatterns": [
+    ".devcontainer",
+    ".vscode",
+    "backup",
+    "docker",
+    "node_modules",
+    "generators",
+    "dist",
+    "yest"
+  ],
+  "verbose": true,
+  "reporters": [
+    "default",
+    "jest-spin-reporter",
+    [
+      "./node_modules/jest-html-reporter",
+      {
+        "pageTitle": "Test Report",
+        "includeFailureMsg": true
+      }
+    ]
+  ],
+  "globalSetup": "<rootDir>/test/setup.ts",
+  "globalTeardown": "<rootDir>/test/teardown.ts"
+}

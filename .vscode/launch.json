@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach NestJS WS",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "address": "localhost",
+      "protocol": "inspector",
+      "restart": true,
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "/home/node/app/*": "${workspaceRoot}/*"
+      },
+      "trace": true
+    }
+  ]
+}

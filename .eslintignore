@@ -1,0 +1,6 @@
+**/docker
+generators
+dist
+.devcontainer
+.vscode
+**/yest/**

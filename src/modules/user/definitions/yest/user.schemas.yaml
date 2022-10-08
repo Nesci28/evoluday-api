@@ -1,0 +1,68 @@
+components:
+  schemas:
+    User:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BaseModel
+        - type: object
+          required:
+            - email
+            - roles
+          properties:
+            email:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email
+            roles:
+              type: array
+              items:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserRole"
+            refreshTokens:
+              type: array
+              items:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RefreshToken"
+            password:
+              type: string
+    RefreshToken:
+      type: object
+      required:
+        - token
+        - userAgentUuid
+        - userAgent
+      properties:
+        token:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BearerToken
+        userAgentUuid:
+          type: string
+        userAgent:
+          type: string
+    DecodedRefreshToken:
+      type: object
+      required:
+        - token
+        - userAgentUuid
+        - userAgent
+        - iat
+        - exp
+      properties:
+        token:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BearerToken
+        userAgentUuid:
+          type: string
+        userAgent:
+          type: string
+        userDealerId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        iat:
+          description: Issued at
+          type: number
+        exp:
+          description: Expiration time
+          type: number
+    UserRole:
+      type: string
+      enum:
+        - Admin
+        - Member
+        - E2E

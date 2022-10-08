@@ -1,0 +1,1963 @@
+openapi: 3.0.3
+servers:
+  - url: https://api.evoluday.com
+info:
+  description: This is a documentation for evoluday api
+  x-locale: fr_CA
+  version: 0.0.1
+  title: api
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: nos@nos.sh
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      operationId: login
+      summary: Login
+      requestBody:
+        $ref: '#/components/requestBodies/LoginRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /auth/refresh:
+    get:
+      tags:
+        - Auth
+      operationId: refreshToken
+      summary: Refresh JWT token
+      responses:
+        '200':
+          $ref: '#/components/responses/RefreshResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /auth/forgot:
+    post:
+      tags:
+        - Auth
+      operationId: forgotPassword
+      summary: Sends a token over Email to reset the password
+      requestBody:
+        $ref: '#/components/requestBodies/ForgotPasswordRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ForgotPasswordResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /auth/reset:
+    post:
+      tags:
+        - Auth
+      operationId: resetPassword
+      summary: Reset a password
+      requestBody:
+        $ref: '#/components/requestBodies/ResetPasswordRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ResetPasswordResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /blank:
+    post:
+      tags:
+        - Blank
+      operationId: blankCreate
+      summary: Creates a new Blank
+      description: Creates a new Blank
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/BlankCreateRequestBody'
+      parameters:
+        - $ref: '#/components/parameters/IsBlankDryRun'
+      responses:
+        '200':
+          $ref: '#/components/responses/BlankCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /blank-all:
+    post:
+      tags:
+        - Blank
+      operationId: blankGetAll
+      summary: Get all Blank
+      description: Get all Blank
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/IsBlankArchived'
+      responses:
+        '200':
+          $ref: '#/components/responses/BlankGetAllResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /blank-search:
+    post:
+      tags:
+        - Blank
+      operationId: blankSearch
+      summary: Search Blank
+      description: Search Blank
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/BlankSearchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/BlankSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /blank/{id}:
+    post:
+      tags:
+        - Blank
+      operationId: blankGetById
+      summary: Get by Id a Blank
+      description: Get by Id a Blank
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/BlankId'
+      responses:
+        '200':
+          $ref: '#/components/responses/BlankFindByIdResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    patch:
+      tags:
+        - Blank
+      operationId: blankPatch
+      summary: Patch a Blank
+      description: Patch a Blank
+      parameters:
+        - $ref: '#/components/parameters/BlankId'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/BlankPatchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/BlankPatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    put:
+      tags:
+        - Blank
+      operationId: blankUpdate
+      summary: Update a Blank
+      description: Update a Blank
+      parameters:
+        - $ref: '#/components/parameters/BlankId'
+        - $ref: '#/components/parameters/IsBlankDryRun'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/BlankUpdateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/BlankUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    delete:
+      tags:
+        - Blank
+      operationId: blankArchive
+      summary: Archive a Blank
+      description: Archive a Blank
+      parameters:
+        - $ref: '#/components/parameters/BlankId'
+      security:
+        - E2E: []
+      responses:
+        '200':
+          $ref: '#/components/responses/BlankArchiveResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /user:
+    post:
+      tags:
+        - User
+      operationId: userCreate
+      summary: Creates a new User
+      description: Creates a new User
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/UserCreateRequestBody'
+      parameters:
+        - $ref: '#/components/parameters/IsUserDryRun'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /user-all:
+    post:
+      tags:
+        - User
+      operationId: userGetAll
+      summary: Get all User
+      description: Get all User
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/IsUserArchived'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserGetAllResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /user-search:
+    post:
+      tags:
+        - User
+      operationId: userSearch
+      summary: Search User
+      description: Search User
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/UserSearchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /user/{id}:
+    post:
+      tags:
+        - User
+      operationId: userGetById
+      summary: Get by Id a User
+      description: Get by Id a User
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserFindByIdResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    patch:
+      tags:
+        - User
+      operationId: userPatch
+      summary: Patch a User
+      description: Patch a User
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/UserPatchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserPatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    put:
+      tags:
+        - User
+      operationId: userUpdate
+      summary: Update a User
+      description: Update a User
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/IsUserDryRun'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/UserUpdateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UserUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    delete:
+      tags:
+        - User
+      operationId: userArchive
+      summary: Archive a User
+      description: Archive a User
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      security:
+        - E2E: []
+      responses:
+        '200':
+          $ref: '#/components/responses/UserArchiveResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /healthcheck:
+    get:
+      tags:
+        - Healthcheck
+      operationId: getHealthcheck
+      summary: Healthcheck
+      description: Returns a ResultHandler with the version number of the current build
+      responses:
+        '200':
+          $ref: '#/components/responses/HealthcheckResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '406':
+          $ref: '#/components/responses/NotAcceptableResultResponse'
+  /assets/{bucketname}/{filename}:
+    get:
+      tags:
+        - Minio
+      operationId: getFile
+      summary: Get a file from Minio
+      parameters:
+        - $ref: '#/components/parameters/BucketName'
+        - $ref: '#/components/parameters/FileName'
+      responses:
+        '200':
+          description: Returns a file from Minio
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      tags:
+        - Minio
+      operationId: updateFile
+      summary: Update a file from Minio
+      parameters:
+        - $ref: '#/components/parameters/BucketName'
+        - $ref: '#/components/parameters/FileName'
+      responses:
+        '200':
+          description: Returns a file from Minio
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags:
+        - Minio
+      operationId: deleteFile
+      summary: Delete a file from Minio
+      parameters:
+        - $ref: '#/components/parameters/BucketName'
+        - $ref: '#/components/parameters/FileName'
+      responses:
+        '200':
+          description: Returns a file from Minio
+          content:
+            application/json:
+              schema:
+                type: object
+  /assets/{bucketname}:
+    post:
+      tags:
+        - Minio
+      operationId: uploadFile
+      summary: Upload a file to Minio
+      parameters:
+        - $ref: '#/components/parameters/BucketName'
+      requestBody:
+        $ref: '#/components/requestBodies/MinioRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UploadResponse'
+components:
+  securitySchemes:
+    admin:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    member:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Dummy:
+      type: object
+      properties:
+        contract:
+          $ref: '#/components/schemas/ResultHandlerInterface'
+        healthcheck:
+          $ref: '#/components/schemas/Healthcheck'
+        minio:
+          $ref: '#/components/schemas/Upload'
+    LoginRequestBody:
+      type: object
+      required:
+        - email
+        - password
+        - rememberMe
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        password:
+          type: string
+          x-faker: internet.password
+        rememberMe:
+          type: boolean
+    ForgotPasswordRequestBody:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+    ResetPasswordRequestBody:
+      type: object
+      required:
+        - email
+        - token
+        - password
+        - confirmedPassword
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        token:
+          type: string
+        password:
+          type: string
+        confirmedPassword:
+          type: string
+    ForgotPasswordCreate:
+      type: object
+      required:
+        - email
+        - token
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        token:
+          description: 6 digits string
+          type: string
+    ForgotPasswordSearch:
+      allOf:
+        - $ref: '#/components/schemas/ForgotPasswordPaginationQuery'
+        - $ref: '#/components/schemas/ForgotPasswordConditionQuery'
+    ForgotPasswordPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/ForgotPasswordPagination'
+    ForgotPasswordPagination:
+      $ref: '#/components/schemas/Pagination'
+    ForgotPasswordConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/ForgotPasswordConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/ForgotPasswordConditionFields'
+    ForgotPasswordConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        token:
+          $ref: '#/components/schemas/SearchStringCondition'
+        email:
+          $ref: '#/components/schemas/SearchStringCondition'
+        date:
+          $ref: '#/components/schemas/SearchDateCondition'
+    LoginResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: object
+              required:
+                - jwt
+                - refreshToken
+              properties:
+                jwt:
+                  type: string
+                refreshToken:
+                  type: string
+    RefreshResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: object
+              required:
+                - jwt
+                - refreshToken
+              properties:
+                jwt:
+                  type: string
+                refreshToken:
+                  type: string
+    ForgotPasswordResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/ForgotPassword'
+    ResetPasswordResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: boolean
+    ForgotPassword:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - token
+            - email
+          properties:
+            token:
+              description: 6 digits string
+              type: string
+            email:
+              $ref: '#/components/schemas/Email'
+            date:
+              $ref: '#/components/schemas/DateTime'
+    BlankCreate:
+      type: object
+      properties:
+        blank:
+          type: string
+    BlankPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        blank:
+          type: string
+    BlankSearchRequestBody:
+      $ref: '#/components/schemas/BlankSearch'
+    BlankUpdate:
+      type: object
+      properties:
+        blank:
+          type: string
+    BlankSearch:
+      allOf:
+        - $ref: '#/components/schemas/BlankPaginationQuery'
+        - $ref: '#/components/schemas/BlankConditionQuery'
+    BlankConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+    BlankConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/BlankConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/BlankConditionFields'
+    BlankPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/BlankPagination'
+    BlankPagination:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            sort:
+              $ref: '#/components/schemas/BlankSort'
+    BlankSort:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Sorting'
+        updatedAt:
+          $ref: '#/components/schemas/Sorting'
+        createdAt:
+          $ref: '#/components/schemas/Sorting'
+        archived:
+          $ref: '#/components/schemas/Sorting'
+        blank:
+          $ref: '#/components/schemas/Sorting'
+    BlankCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Blank'
+    BlankGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Blank'
+    BlankFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Blank'
+    BlankSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Blank'
+    BlankPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Blank'
+    BlankUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Blank'
+    BlankArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Blank'
+    Blank:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          properties:
+            blank:
+              type: string
+    UserCreate:
+      type: object
+      required:
+        - email
+        - roles
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRole'
+        refreshTokens:
+          type: array
+          items:
+            type: object
+            required:
+              - token
+              - userAgentUuid
+              - userAgent
+            properties:
+              token:
+                $ref: '#/components/schemas/BearerToken'
+              userAgentUuid:
+                type: string
+              userAgent:
+                type: string
+        password:
+          type: string
+    UserPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRole'
+        refreshTokens:
+          type: array
+          items:
+            type: object
+            required:
+              - token
+              - userAgentUuid
+              - userAgent
+            properties:
+              token:
+                $ref: '#/components/schemas/BearerToken'
+              userAgentUuid:
+                type: string
+              userAgent:
+                type: string
+        password:
+          type: string
+    UserSearchRequestBody:
+      $ref: '#/components/schemas/UserSearch'
+    UserUpdate:
+      type: object
+      required:
+        - email
+        - roles
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRole'
+        refreshTokens:
+          type: array
+          items:
+            type: object
+            required:
+              - token
+              - userAgentUuid
+              - userAgent
+            properties:
+              token:
+                $ref: '#/components/schemas/BearerToken'
+              userAgentUuid:
+                type: string
+              userAgent:
+                type: string
+        password:
+          type: string
+    UserSearch:
+      allOf:
+        - $ref: '#/components/schemas/UserPaginationQuery'
+        - $ref: '#/components/schemas/UserConditionQuery'
+    UserConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        email:
+          $ref: '#/components/schemas/SearchStringCondition'
+        refreshTokens_token:
+          $ref: '#/components/schemas/SearchStringCondition'
+    UserConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/UserConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/UserConditionFields'
+    UserPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/UserPagination'
+    UserPagination:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            sort:
+              $ref: '#/components/schemas/UserSort'
+    UserSort:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Sorting'
+        updatedAt:
+          $ref: '#/components/schemas/Sorting'
+        createdAt:
+          $ref: '#/components/schemas/Sorting'
+        archived:
+          $ref: '#/components/schemas/Sorting'
+        email:
+          $ref: '#/components/schemas/Sorting'
+        roles:
+          $ref: '#/components/schemas/Sorting'
+        refreshTokens:
+          $ref: '#/components/schemas/Sorting'
+        password:
+          $ref: '#/components/schemas/Sorting'
+    User:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - email
+            - roles
+          properties:
+            email:
+              $ref: '#/components/schemas/Email'
+            roles:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserRole'
+            refreshTokens:
+              type: array
+              items:
+                $ref: '#/components/schemas/RefreshToken'
+            password:
+              type: string
+    RefreshToken:
+      type: object
+      required:
+        - token
+        - userAgentUuid
+        - userAgent
+      properties:
+        token:
+          $ref: '#/components/schemas/BearerToken'
+        userAgentUuid:
+          type: string
+        userAgent:
+          type: string
+    DecodedRefreshToken:
+      type: object
+      required:
+        - token
+        - userAgentUuid
+        - userAgent
+        - iat
+        - exp
+      properties:
+        token:
+          $ref: '#/components/schemas/BearerToken'
+        userAgentUuid:
+          type: string
+        userAgent:
+          type: string
+        userDealerId:
+          $ref: '#/components/schemas/ObjectID'
+        iat:
+          description: Issued at
+          type: number
+        exp:
+          description: Expiration time
+          type: number
+    JwtTokenPayload:
+      type: object
+      required:
+        - userId
+        - roles
+      properties:
+        userId:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRole'
+    UserRole:
+      type: string
+      enum:
+        - Admin
+        - Member
+        - E2E
+    UserCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/User'
+    UserFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/User'
+    UserPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    ExtensionModule:
+      type: string
+      enum:
+        - Evaluation
+        - Devtools
+    SupportedLanguage:
+      type: string
+      enum:
+        - Fr
+        - En
+    ManualString:
+      type: object
+      properties:
+        controlId:
+          $ref: '#/components/schemas/ObjectID'
+        value:
+          type: string
+    ManualNumber:
+      type: object
+      properties:
+        controlId:
+          $ref: '#/components/schemas/ObjectID'
+        value:
+          type: number
+    ManualBoolean:
+      type: object
+      properties:
+        controlId:
+          $ref: '#/components/schemas/ObjectID'
+        value:
+          type: boolean
+    ManualDate:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/DateTime'
+        controlId:
+          $ref: '#/components/schemas/ObjectID'
+    PropertyControlType:
+      type: string
+      enum:
+        - TranslatableText
+        - String
+        - Number
+        - Boolean
+        - Date
+    StringOptionId:
+      type: string
+      description: Used by yest-cli to map proper response. (string)
+      pattern: ^[0-9a-f]{24}$
+    TranslatableTextOptionId:
+      type: string
+      description: Used by yest-cli to map proper response. (translatableText)
+      pattern: ^[0-9a-f]{24}$
+    NumberOptionId:
+      type: string
+      description: Used by yest-cli to map proper response. (number)
+      pattern: ^[0-9a-f]{24}$
+    BooleanOptionId:
+      type: string
+      description: Used by yest-cli to map proper response. (boolean)
+      pattern: ^[0-9a-f]{24}$
+    DateOptionId:
+      type: string
+      description: Used by yest-cli to map proper response. (date)
+      pattern: ^[0-9a-f]{24}$
+    BaseOption:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - sequence
+            - controlId
+            - label
+          properties:
+            sequence:
+              type: number
+            controlId:
+              $ref: '#/components/schemas/ObjectID'
+            label:
+              $ref: '#/components/schemas/TranslatableText'
+    TranslatableTextOption:
+      allOf:
+        - $ref: '#/components/schemas/BaseOption'
+        - type: object
+          required:
+            - value
+          properties:
+            value:
+              $ref: '#/components/schemas/TranslatableText'
+    StringOption:
+      allOf:
+        - $ref: '#/components/schemas/BaseOption'
+        - type: object
+          required:
+            - value
+          properties:
+            value:
+              type: string
+    NumberOption:
+      allOf:
+        - $ref: '#/components/schemas/BaseOption'
+        - type: object
+          required:
+            - value
+          properties:
+            value:
+              type: number
+    BooleanOption:
+      allOf:
+        - $ref: '#/components/schemas/BaseOption'
+        - type: object
+          required:
+            - value
+          properties:
+            value:
+              type: boolean
+    DateOption:
+      allOf:
+        - $ref: '#/components/schemas/BaseOption'
+        - type: object
+          required:
+            - value
+          properties:
+            value:
+              $ref: '#/components/schemas/DateTime'
+    PaginationLimit:
+      type: number
+      minimum: -1
+      maximum: 2147483647
+      default: 10
+      format: int32
+    PaginationLimit1000:
+      type: number
+      minimum: 0
+      maximum: 1000
+      default: 10
+      format: int32
+    PaginationOffset:
+      type: number
+      minimum: 0
+      maximum: 2147483647
+      format: int32
+    PaginationPage:
+      type: number
+      minimum: 1
+      maximum: 2147483647
+      format: int32
+    Pagination:
+      type: object
+      properties:
+        limit:
+          $ref: '#/components/schemas/PaginationLimit'
+        offset:
+          $ref: '#/components/schemas/PaginationOffset'
+        page:
+          $ref: '#/components/schemas/PaginationPage'
+        sort:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Sorting'
+    Sorting:
+      type: string
+      enum:
+        - Ascending
+        - Descending
+    ProtectedTranslatableText:
+      type: object
+      required:
+        - scopeNames
+        - value
+      properties:
+        value:
+          $ref: '#/components/schemas/TranslatableText'
+        scopeNames:
+          description: scope name to have access to the value
+          type: array
+          items:
+            type: string
+    ProtectedString:
+      type: object
+      required:
+        - scopeNames
+        - value
+      properties:
+        value:
+          type: string
+        scopeNames:
+          description: scope names to have access to the value
+          type: array
+          items:
+            type: string
+    ProtectedNumber:
+      type: object
+      required:
+        - scopeNames
+        - value
+      properties:
+        value:
+          type: number
+        scopeNames:
+          description: scope name to have access to the value
+          type: array
+          items:
+            type: string
+    ProtectedBoolean:
+      type: object
+      required:
+        - scopeNames
+        - value
+      properties:
+        value:
+          type: boolean
+        scopeNames:
+          description: scope name to have access to the value
+          type: array
+          items:
+            type: string
+    ProtectedDate:
+      type: object
+      required:
+        - scopeNames
+        - value
+      properties:
+        value:
+          $ref: '#/components/schemas/DateTime'
+        scopeNames:
+          description: scope name to have access to the value
+          type: array
+          items:
+            type: string
+    SearchDateCondition:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchDateOperation'
+    SearchNumberCondition:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchNumberOperation'
+    SearchBooleanCondition:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchBooleanOperation'
+    SearchStringCondition:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchStringOperation'
+    SearchDateOperation:
+      allOf:
+        - $ref: '#/components/schemas/SearchOperatorAdvanced'
+        - type: object
+          required:
+            - values
+          properties:
+            values:
+              nullable: true
+              type: array
+              items:
+                type: string
+                format: date-time
+    SearchNumberOperation:
+      allOf:
+        - $ref: '#/components/schemas/SearchOperatorAdvanced'
+        - type: object
+          required:
+            - values
+          properties:
+            values:
+              nullable: true
+              type: array
+              items:
+                type: number
+    SearchBooleanOperation:
+      allOf:
+        - $ref: '#/components/schemas/SearchOperatorBasic'
+        - type: object
+          required:
+            - value
+          properties:
+            value:
+              nullable: true
+              type: boolean
+    SearchStringOperation:
+      allOf:
+        - $ref: '#/components/schemas/SearchOperatorBasic'
+        - type: object
+          required:
+            - values
+          properties:
+            isCaseSensitive:
+              type: boolean
+              default: false
+            isExactMatching:
+              type: boolean
+              default: false
+            isTranslatable:
+              type: boolean
+              default: false
+            values:
+              nullable: true
+              type: array
+              items:
+                type: string
+    SearchOperatorBasic:
+      type: object
+      properties:
+        operator:
+          $ref: '#/components/schemas/BasicOperator'
+    SearchOperatorAdvanced:
+      type: object
+      properties:
+        operator:
+          $ref: '#/components/schemas/AdvancedOperator'
+    BasicOperator:
+      type: string
+      default: Equal
+      enum:
+        - Equal
+        - Different
+    AdvancedOperator:
+      type: string
+      default: Equal
+      enum:
+        - Equal
+        - Different
+        - GreaterThan
+        - LesserThan
+        - GreaterThanEqual
+        - LesserThanEqual
+    Percentage:
+      type: number
+      x-faker: datatype.number
+      minimum: 1
+      maximum: 100
+    BearerToken:
+      type: string
+      pattern: ^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$
+    BaseModel:
+      type: object
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - archived
+      properties:
+        id:
+          x-index: true
+          $ref: '#/components/schemas/ObjectID'
+        createdAt:
+          type: string
+          format: date-time
+          maxLength: 24
+          x-faker: date.past
+        updatedAt:
+          type: string
+          format: date-time
+          maxLength: 24
+          x-faker: date.future
+        archived:
+          type: boolean
+    ObjectID:
+      type: string
+      pattern: ^[0-9a-f]{24}$
+    TextTranslation:
+      type: object
+      required:
+        - text
+      properties:
+        language:
+          type: string
+        text:
+          type: string
+          x-faker: lorem.paragraph
+    TranslatableText:
+      type: object
+      required:
+        - translation
+      properties:
+        translation:
+          type: array
+          items:
+            $ref: '#/components/schemas/TextTranslation'
+    UrlTranslation:
+      type: object
+      required:
+        - text
+      properties:
+        language:
+          type: string
+        text:
+          type: string
+          x-faker: internet.url
+    TranslatableUrl:
+      type: object
+      required:
+        - translation
+      properties:
+        translation:
+          type: array
+          items:
+            $ref: '#/components/schemas/UrlTranslation'
+    Latitude:
+      type: number
+      format: double
+      minimum: -90
+      maximum: 90
+      x-faker: address.latitude
+      example: 41.890169
+    Longitude:
+      type: number
+      format: double
+      minimum: -180
+      maximum: 180
+      x-faker: address.longitude
+      example: 12.492269
+    MultiDayTime:
+      type: string
+      description: Time from "noon minus 12h", 24h+ format
+      pattern: ^\d{2}:[0-5][0-9]:[0-5][0-9]$
+      example: '25:35:00'
+    NonNegativeInteger:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 2147483647
+    ModelDate:
+      type: string
+      pattern: \d{4}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])
+      example: '20180913'
+    Email:
+      type: string
+      format: email
+    Phone:
+      type: string
+      pattern: ^1{0,1}[0-9]{10}$
+      example: 15555555555
+    DateTime:
+      type: string
+      format: date-time
+      x-faker: date.future
+      maxLength: 24
+    Uuid:
+      type: string
+      pattern: >-
+        ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+      example: 1f6c68d8-f3ec-4b5f-bf94-64545c12dac4
+    ErrorData:
+      type: object
+      required:
+        - uuid
+        - httpCode
+        - message
+      properties:
+        uuid:
+          $ref: '#/components/schemas/Uuid'
+        httpCode:
+          description: >-
+            An http code that could be use to represent the error through an
+            http layer.
+          type: number
+          minimum: 100
+          maximum: 999
+        message:
+          $ref: '#/components/schemas/TranslatableText'
+    ResultHandlerPagination:
+      type: object
+      required:
+        - totalItems
+        - page
+        - totalPages
+      properties:
+        totalItems:
+          type: number
+          minimum: 0
+          maximum: 2147483647
+          format: int32
+        limit:
+          type: number
+          minimum: 1
+          maximum: 2147483647
+          format: int32
+        hasPrevPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+        page:
+          $ref: '#/components/schemas/PaginationPage'
+        totalPages:
+          type: number
+          minimum: 0
+        prevPage:
+          type: number
+          minimum: 0
+        nextPage:
+          type: number
+          minimum: 1
+    ResultHandlerInterface:
+      type: object
+      description: >-
+        Result object used to contain api data. You should use ResultHandler
+        Class instead of the interface.
+      required:
+        - isSuccess
+      properties:
+        isSuccess:
+          type: boolean
+        error:
+          $ref: '#/components/schemas/ErrorData'
+        pagination:
+          $ref: '#/components/schemas/ResultHandlerPagination'
+    HealthcheckResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Healthcheck'
+    Healthcheck:
+      type: object
+      required:
+        - version
+      properties:
+        version:
+          type: string
+    UploadResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Upload'
+    Upload:
+      description: Informations of a given Upload.
+      type: object
+      required:
+        - bucketName
+        - fileName
+      properties:
+        bucketName:
+          type: string
+        fileName:
+          type: string
+  responses:
+    LoginResponse:
+      description: Returns a JWT Token and a Refresh Token on a successfull login
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginResponse'
+    RefreshResponse:
+      description: Returns a new JWT Token to refresh the old one
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RefreshResponse'
+    ForgotPasswordResponse:
+      description: Returns a token to reset a password
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ForgotPasswordResponse'
+    ResetPasswordResponse:
+      description: Returns a ResultHandler boolean
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResetPasswordResponse'
+    BlankCreateResponse:
+      description: Returns a Blank
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BlankCreateResponse'
+    BlankGetAllResponse:
+      description: Returns an array of Blank
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BlankGetAllResponse'
+    BlankFindByIdResponse:
+      description: Returns a Blank
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BlankFindByIdResponse'
+    BlankSearchResponse:
+      description: Returns a paginated array of Blank
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BlankSearchResponse'
+    BlankPatchResponse:
+      description: Returns a modified Blank
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BlankPatchResponse'
+    BlankUpdateResponse:
+      description: Returns an updated Blank
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BlankUpdateResponse'
+    BlankArchiveResponse:
+      description: Returns a ResultHandler with the archived Blank
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BlankArchiveResponse'
+    UserCreateResponse:
+      description: Returns a User
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserCreateResponse'
+    UserGetAllResponse:
+      description: Returns an array of User
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserGetAllResponse'
+    UserFindByIdResponse:
+      description: Returns a User
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserFindByIdResponse'
+    UserSearchResponse:
+      description: Returns a paginated array of User
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserSearchResponse'
+    UserPatchResponse:
+      description: Returns a modified User
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserPatchResponse'
+    UserUpdateResponse:
+      description: Returns an updated User
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserUpdateResponse'
+    UserArchiveResponse:
+      description: Returns a ResultHandler with the archived User
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserArchiveResponse'
+    SuccessResultResponse:
+      description: Successful request (no content)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResultHandlerInterface'
+    BadRequestResultResponse:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResultHandlerInterface'
+    MissingPermissionResultResponse:
+      description: Forbidden. User don't have permission to complete action
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResultHandlerInterface'
+    MissingTokenResultResponse:
+      description: Missing JWT token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResultHandlerInterface'
+    NotFoundResultResponse:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResultHandlerInterface'
+    NotAcceptableResultResponse:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResultHandlerInterface'
+    InternalErrorResultResponse:
+      description: Internal Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResultHandlerInterface'
+    HealthcheckResponse:
+      description: Returns a ResultHandler with the latest build version number
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HealthcheckResponse'
+    UploadResponse:
+      description: Returns an Upload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadResponse'
+  requestBodies:
+    LoginRequestBody:
+      description: Body needed to login
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginRequestBody'
+    ForgotPasswordRequestBody:
+      description: Body needed to get a password reset token
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ForgotPasswordRequestBody'
+    ResetPasswordRequestBody:
+      description: Body needed to reset the password
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResetPasswordRequestBody'
+    BlankCreateRequestBody:
+      description: Body needed to create a Blank
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BlankCreate'
+    BlankSearchRequestBody:
+      description: Body needed to search Blanks
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BlankSearchRequestBody'
+    BlankPatchRequestBody:
+      description: Body needed to modify a Blank
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BlankPatch'
+    BlankUpdateRequestBody:
+      description: Body needed to update a Blank
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BlankUpdate'
+    UserCreateRequestBody:
+      description: Body needed to create a User
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserCreate'
+    UserSearchRequestBody:
+      description: Body needed to search Users
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserSearchRequestBody'
+    UserPatchRequestBody:
+      description: Body needed to modify a User
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserPatch'
+    UserUpdateRequestBody:
+      description: Body needed to update a User
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserUpdate'
+    MinioRequestBody:
+      content:
+        multipart/form-data:
+          schema:
+            description: Typed as any to prevent generation bug. Use model MinioQuery.
+            type: object
+  parameters:
+    UserId:
+      name: id
+      description: User's Id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/ObjectID'
+    IsUserDryRun:
+      name: isDryRun
+      description: Should this request be ran as a dry run (no save)
+      in: query
+      required: false
+      schema:
+        type: boolean
+    IsUserArchived:
+      name: isArchived
+      description: Get archived User
+      in: query
+      required: false
+      schema:
+        type: boolean
+    BlankId:
+      name: id
+      description: Blank's Id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/ObjectID'
+    IsBlankDryRun:
+      name: isDryRun
+      description: Should this request be ran as a dry run (no save)
+      in: query
+      required: false
+      schema:
+        type: boolean
+    IsBlankArchived:
+      name: isArchived
+      description: Get archived Blank
+      in: query
+      required: false
+      schema:
+        type: boolean
+    BucketName:
+      name: bucketname
+      in: path
+      description: Bucket's Name
+      required: true
+      schema:
+        type: string
+    FileName:
+      name: filename
+      in: path
+      description: File's Name
+      required: true
+      schema:
+        type: string

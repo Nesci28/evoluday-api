@@ -1,0 +1,173 @@
+paths:
+  /blank:
+    post:
+      tags:
+        - Blank
+      operationId: blankCreate
+      summary: Creates a new Blank
+      description: Creates a new Blank
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./blank.request-bodies.yaml#/components/requestBodies/BlankCreateRequestBody"
+      parameters:
+        - $ref: "./blank.parameters.yaml#/components/parameters/IsBlankDryRun"
+      responses:
+        200:
+          $ref: "./blank.responses.yaml#/components/responses/BlankCreateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /blank-all:
+    post:
+      tags:
+        - Blank
+      operationId: blankGetAll
+      summary: Get all Blank
+      description: Get all Blank
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./blank.parameters.yaml#/components/parameters/IsBlankArchived"
+      responses:
+        200:
+          $ref: "./blank.responses.yaml#/components/responses/BlankGetAllResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /blank-search:
+    post:
+      tags:
+        - Blank
+      operationId: blankSearch
+      summary: Search Blank
+      description: Search Blank
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./blank.request-bodies.yaml#/components/requestBodies/BlankSearchRequestBody"
+      responses:
+        200:
+          $ref: "./blank.responses.yaml#/components/responses/BlankSearchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /blank/{id}:
+    post:
+      tags:
+        - Blank
+      operationId: blankGetById
+      summary: Get by Id a Blank
+      description: Get by Id a Blank
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./blank.parameters.yaml#/components/parameters/BlankId"
+      responses:
+        200:
+          $ref: "./blank.responses.yaml#/components/responses/BlankFindByIdResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    patch:
+      tags:
+        - Blank
+      operationId: blankPatch
+      summary: Patch a Blank
+      description: Patch a Blank
+      parameters:
+        - $ref: "./blank.parameters.yaml#/components/parameters/BlankId"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./blank.request-bodies.yaml#/components/requestBodies/BlankPatchRequestBody"
+      responses:
+        200:
+          $ref: "./blank.responses.yaml#/components/responses/BlankPatchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    put:
+      tags:
+        - Blank
+      operationId: blankUpdate
+      summary: Update a Blank
+      description: Update a Blank
+      parameters:
+        - $ref: "./blank.parameters.yaml#/components/parameters/BlankId"
+        - $ref: "./blank.parameters.yaml#/components/parameters/IsBlankDryRun"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./blank.request-bodies.yaml#/components/requestBodies/BlankUpdateRequestBody"
+      responses:
+        200:
+          $ref: "./blank.responses.yaml#/components/responses/BlankUpdateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    delete:
+      tags:
+        - Blank
+      operationId: blankArchive
+      summary: Archive a Blank
+      description: Archive a Blank
+      parameters:
+        - $ref: "./blank.parameters.yaml#/components/parameters/BlankId"
+      security:
+        - E2E: []
+      responses:
+        200:
+          $ref: "./blank.responses.yaml#/components/responses/BlankArchiveResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"

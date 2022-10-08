@@ -1,0 +1,83 @@
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      operationId: login
+      summary: Login
+      requestBody:
+        $ref: "./auth.request-bodies.yaml#/components/requestBodies/LoginRequestBody"
+      responses:
+        200:
+          $ref: "./auth.responses.yaml#/components/responses/LoginResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /auth/refresh:
+    get:
+      tags:
+        - Auth
+      operationId: refreshToken
+      summary: Refresh JWT token
+      responses:
+        200:
+          $ref: './auth.responses.yaml#/components/responses/RefreshResponse'
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /auth/forgot:
+    post:
+      tags:
+        - Auth
+      operationId: forgotPassword
+      summary: Sends a token over Email to reset the password
+      requestBody:
+        $ref: "./auth.request-bodies.yaml#/components/requestBodies/ForgotPasswordRequestBody"
+      responses:
+        200:
+          $ref: './auth.responses.yaml#/components/responses/ForgotPasswordResponse'
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /auth/reset:
+    post:
+      tags:
+        - Auth
+      operationId: resetPassword
+      summary: Reset a password
+      requestBody:
+        $ref: "./auth.request-bodies.yaml#/components/requestBodies/ResetPasswordRequestBody"
+      responses:
+        200:
+          $ref: './auth.responses.yaml#/components/responses/ResetPasswordResponse'
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"

@@ -1,0 +1,13 @@
+components:
+  schemas:
+    ExtensionModule:
+      type: string
+      enum:
+        - Evaluation
+        - Devtools
+
+    SupportedLanguage:
+      type: string
+      enum:
+        - Fr
+        - En

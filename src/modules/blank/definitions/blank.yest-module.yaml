@@ -1,0 +1,9 @@
+configs:
+  moduleName: blank
+components:
+  schemas:
+    Blank:
+      type: object
+      properties:
+        blank:
+          type: string

@@ -1,0 +1,59 @@
+import { Injectable } from "@angular/core";
+    import {
+      Blank,
+      BlankApi as BlankConnector,
+      BlankCreateRequestBody,
+      BlankPatchRequestBody,
+      BlankSearch,
+      BlankUpdateRequestBody,
+    } from "@evoluday/api-typescript-fetch";
+    import { ResultHandler } from "@yest/result-handler";
+    import { from, Observable } from "rxjs";
+
+    import { BaseService } from "../../interfaces/base-service.interface";
+
+    @Injectable()
+    export class BlankService implements BaseService<Blank> {
+      constructor(
+        private blankConnector: BlankConnector,
+      ) {}
+
+      public getAll(): Observable<ResultHandler<Blank[]>> {
+        return from(this.blankConnector.blankGetAll({ isArchived: false }));
+      }
+
+      public getById(id: string): Observable<ResultHandler<Blank>> {
+        return from(this.blankConnector.blankGetById({ id }));
+      }
+
+      public create(
+        blankCreateRequestBody: BlankCreateRequestBody,
+      ): Observable<ResultHandler<Blank>> {
+        return from(this.blankConnector.blankCreate({ blankCreateRequestBody }));
+      }
+
+      public update(
+        id: string,
+        blankUpdateRequestBody: BlankUpdateRequestBody,
+      ): Observable<ResultHandler<Blank>> {
+        return from(
+          this.blankConnector.blankUpdate({ id, blankUpdateRequestBody }),
+        );
+      }
+
+      public patch(
+        id: string,
+        blankPatchRequestBody: BlankPatchRequestBody,
+      ): Observable<ResultHandler<Blank>> {
+        return from(this.blankConnector.blankPatch({ id, blankPatchRequestBody }));
+      }
+
+      public archive(id: string): Observable<ResultHandler<Blank>> {
+        return from(this.blankConnector.blankArchive({ id }));
+      }
+
+      public search(body: BlankSearch): Observable<ResultHandler<Blank[]>> {
+        return from(this.blankConnector.blankSearch({ body }));
+      }
+    }
+    

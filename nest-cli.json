@@ -1,0 +1,16 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "assets": [
+      {
+        "include": "**/resolved.yaml",
+        "outDir": "dist/src"
+      },
+      {
+        "include": "**/resolved-deep.yaml",
+        "outDir": "dist/src"
+      }
+    ]
+  }
+}

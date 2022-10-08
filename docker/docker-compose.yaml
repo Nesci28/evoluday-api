@@ -1,0 +1,56 @@
+version: '3.7'
+services:
+  1se-api:
+    image: docker.okidoo.co/node-dev:latest
+    container_name: 1se-api
+    dns: 1.1.1.1
+    env_file:
+      - ./.1se-api.env
+      - ./.git.env
+    command: tail -F anything
+    networks:
+      - 1se-api
+    ports:
+      - ${API_PORT}:3000
+    volumes:
+      - ./.npmrc:/home/node/.npmrc
+      - ../:/home/node/app
+      - ~/.ssh/:/home/node/.ssh/
+    depends_on:
+      1se-api-mongo:
+        condition: service_healthy
+
+  1se-api-minio:
+    image: bitnami/minio:latest
+    container_name: 1se-api-minio
+    volumes:
+      - ../server/docker/minio:/data
+    ports:
+      - ${MINIO_EXPOSE_PORT_9000}:9000
+      - ${MINIO_EXPOSE_PORT_9001}:9001
+    environment:
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
+    networks:
+      - 1se-api
+
+  1se-api-mongo:
+    image: mongo:latest
+    container_name: 1se-api-mongo
+    ports:
+      - ${MONGO_PORT}:27017
+    env_file:
+      - ./.mongo.env
+    volumes:
+      - ./mongo:/data/db
+    networks:
+      - 1se-api
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017 --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+networks:
+  1se-api:
