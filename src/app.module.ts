@@ -19,6 +19,7 @@ import { v4 } from "uuid";
 import { configs } from "./constants/configs.constant";
 import { AuthModule } from "./modules/auth/auth.module";
 import { AuthService } from "./modules/auth/auth.service";
+import { UserModule } from "./modules/user/user.module";
 
 const configModule = ConfigModule.forRoot({
   validationSchema: Joi.object({
@@ -93,7 +94,7 @@ export const appImports = [
   }),
 ];
 
-const moduleImports = [];
+const moduleImports = [AuthModule, UserModule];
 
 const appProviders = [
   {
@@ -123,5 +124,5 @@ export const meta = {
 const metaCloned = cloneDeep(meta);
 metaCloned.imports.push(yestRouterModule, mongooseModule);
 
-@Module(meta)
+@Module(metaCloned)
 export class AppModule {}

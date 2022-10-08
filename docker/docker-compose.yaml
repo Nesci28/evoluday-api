@@ -1,15 +1,15 @@
 version: '3.7'
 services:
-  1se-api:
+  evoluday-api:
     image: docker.okidoo.co/node-dev:latest
-    container_name: 1se-api
+    container_name: evoluday-api
     dns: 1.1.1.1
     env_file:
-      - ./.1se-api.env
+      - ./.evoluday-api.env
       - ./.git.env
     command: tail -F anything
     networks:
-      - 1se-api
+      - evoluday-api
     ports:
       - ${API_PORT}:3000
     volumes:
@@ -17,14 +17,14 @@ services:
       - ../:/home/node/app
       - ~/.ssh/:/home/node/.ssh/
     depends_on:
-      1se-api-mongo:
+      evoluday-api-mongo:
         condition: service_healthy
 
-  1se-api-minio:
+  evoluday-api-minio:
     image: bitnami/minio:latest
-    container_name: 1se-api-minio
+    container_name: evoluday-api-minio
     volumes:
-      - ../server/docker/minio:/data
+      - ../docker/minio:/data
     ports:
       - ${MINIO_EXPOSE_PORT_9000}:9000
       - ${MINIO_EXPOSE_PORT_9001}:9001
@@ -32,11 +32,11 @@ services:
       - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
       - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
     networks:
-      - 1se-api
+      - evoluday-api
 
-  1se-api-mongo:
+  evoluday-api-mongo:
     image: mongo:latest
-    container_name: 1se-api-mongo
+    container_name: evoluday-api-mongo
     ports:
       - ${MONGO_PORT}:27017
     env_file:
@@ -44,7 +44,7 @@ services:
     volumes:
       - ./mongo:/data/db
     networks:
-      - 1se-api
+      - evoluday-api
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017 --quiet
       interval: 10s
@@ -52,5 +52,13 @@ services:
       retries: 5
       start_period: 40s
 
+  evoluday-api-redis:
+    image: redis:latest
+    container_name: evoluday-api-redis
+    networks:
+      - evoluday-api
+    ports:
+      - ${REDIS_PORT}:6379
+
 networks:
-  1se-api:
+  evoluday-api:

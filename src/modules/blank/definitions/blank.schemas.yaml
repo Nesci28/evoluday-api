@@ -1,9 +1,0 @@
-components:
-  schemas:
-    Blank:
-      allOf:
-        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BaseModel
-        - type: object
-          properties:
-            blank:
-              type: string
