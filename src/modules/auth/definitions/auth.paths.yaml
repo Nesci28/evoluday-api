@@ -1,4 +1,25 @@
 paths:
+  /auth/signup:
+    post:
+      tags:
+        - Auth
+      operationId: signup
+      summary: Signup
+      requestBody:
+        $ref: "./auth.request-bodies.yaml#/components/requestBodies/SignupRequestBody"
+      responses:
+        200:
+          $ref: "./auth.responses.yaml#/components/responses/SignupResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
   /auth/login:
     post:
       tags:

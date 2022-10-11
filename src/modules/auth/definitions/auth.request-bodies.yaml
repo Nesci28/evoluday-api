@@ -1,5 +1,12 @@
 components:
   requestBodies:
+    SignupRequestBody:
+      description: Body needed to signup
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SignupRequestBody"
     LoginRequestBody:
       description: Body needed to login
       required: true
@@ -22,6 +29,25 @@ components:
           schema:
             $ref: "#/components/schemas/ResetPasswordRequestBody"
   schemas:
+    SignupRequestBody:
+      type: object
+      required:
+        - email
+        - password
+        - confirmedPassword
+        - serverUrl
+      properties:
+        email:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email"
+        password:
+          type: string
+          x-faker: internet.password
+        confirmedPassword:
+          type: string
+          x-faker: internet.password
+        serverUrl:
+          type: string
+          x-faker: internal.url
     LoginRequestBody:
       type: object
       required:

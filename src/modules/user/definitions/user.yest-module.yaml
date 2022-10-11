@@ -33,29 +33,6 @@ components:
           type: string
         userAgent:
           type: string
-    DecodedRefreshToken:
-      type: object
-      required:
-        - token
-        - userAgentUuid
-        - userAgent
-        - iat
-        - exp
-      properties:
-        token:
-          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BearerToken"
-        userAgentUuid:
-          type: string
-        userAgent:
-          type: string
-        userDealerId:
-          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
-        iat:
-          description: Issued at
-          type: number
-        exp:
-          description: Expiration time
-          type: number
     UserRole:
       type: string
       enum:

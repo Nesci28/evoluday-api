@@ -1,5 +1,12 @@
 components:
   responses:
+    SignupResponse:
+      description: Returns a boolean
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SignupResponse'
+
     LoginResponse:
       description: Returns a JWT Token and a Refresh Token on a successfull login
       content:
@@ -69,6 +76,14 @@ components:
               $ref: "./auth.schemas.yaml#/components/schemas/ForgotPassword"
 
     ResetPasswordResponse:
+      allOf:
+        - $ref: '../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: boolean
+
+    SignupResponse:
       allOf:
         - $ref: '../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface'
         - type: object

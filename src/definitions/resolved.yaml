@@ -16,6 +16,27 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 paths:
+  /auth/signup:
+    post:
+      tags:
+        - Auth
+      operationId: signup
+      summary: Signup
+      requestBody:
+        $ref: '#/components/requestBodies/SignupRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/SignupResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
   /auth/login:
     post:
       tags:
@@ -88,178 +109,6 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/ResetPasswordResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /blank:
-    post:
-      tags:
-        - Blank
-      operationId: blankCreate
-      summary: Creates a new Blank
-      description: Creates a new Blank
-      security:
-        - E2E: []
-      requestBody:
-        $ref: '#/components/requestBodies/BlankCreateRequestBody'
-      parameters:
-        - $ref: '#/components/parameters/IsBlankDryRun'
-      responses:
-        '200':
-          $ref: '#/components/responses/BlankCreateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /blank-all:
-    post:
-      tags:
-        - Blank
-      operationId: blankGetAll
-      summary: Get all Blank
-      description: Get all Blank
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/IsBlankArchived'
-      responses:
-        '200':
-          $ref: '#/components/responses/BlankGetAllResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /blank-search:
-    post:
-      tags:
-        - Blank
-      operationId: blankSearch
-      summary: Search Blank
-      description: Search Blank
-      security:
-        - E2E: []
-      requestBody:
-        $ref: '#/components/requestBodies/BlankSearchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/BlankSearchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /blank/{id}:
-    post:
-      tags:
-        - Blank
-      operationId: blankGetById
-      summary: Get by Id a Blank
-      description: Get by Id a Blank
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/BlankId'
-      responses:
-        '200':
-          $ref: '#/components/responses/BlankFindByIdResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    patch:
-      tags:
-        - Blank
-      operationId: blankPatch
-      summary: Patch a Blank
-      description: Patch a Blank
-      parameters:
-        - $ref: '#/components/parameters/BlankId'
-      security:
-        - E2E: []
-      requestBody:
-        $ref: '#/components/requestBodies/BlankPatchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/BlankPatchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    put:
-      tags:
-        - Blank
-      operationId: blankUpdate
-      summary: Update a Blank
-      description: Update a Blank
-      parameters:
-        - $ref: '#/components/parameters/BlankId'
-        - $ref: '#/components/parameters/IsBlankDryRun'
-      security:
-        - E2E: []
-      requestBody:
-        $ref: '#/components/requestBodies/BlankUpdateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/BlankUpdateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    delete:
-      tags:
-        - Blank
-      operationId: blankArchive
-      summary: Archive a Blank
-      description: Archive a Blank
-      parameters:
-        - $ref: '#/components/parameters/BlankId'
-      security:
-        - E2E: []
-      responses:
-        '200':
-          $ref: '#/components/responses/BlankArchiveResponse'
         '400':
           $ref: '#/components/responses/BadRequestResultResponse'
         '401':
@@ -541,6 +390,21 @@ components:
           $ref: '#/components/schemas/Healthcheck'
         minio:
           $ref: '#/components/schemas/Upload'
+    SignupRequestBody:
+      type: object
+      required:
+        - email
+        - password
+        - confirmedPassword
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        password:
+          type: string
+          x-faker: internet.password
+        confirmedPassword:
+          type: string
+          x-faker: internet.password
     LoginRequestBody:
       type: object
       required:
@@ -678,6 +542,13 @@ components:
           properties:
             value:
               type: boolean
+    SignupResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: boolean
     ForgotPassword:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -693,89 +564,37 @@ components:
               $ref: '#/components/schemas/Email'
             date:
               $ref: '#/components/schemas/DateTime'
-    BlankCreate:
+    DecodedRefreshToken:
       type: object
+      required:
+        - token
+        - userAgentUuid
+        - userAgent
+        - iat
+        - exp
       properties:
-        blank:
+        token:
+          $ref: '#/components/schemas/BearerToken'
+        userAgentUuid:
           type: string
-    BlankPatch:
-      x-min-properties: 1
-      type: object
-      properties:
-        blank:
+        userAgent:
           type: string
-    BlankSearchRequestBody:
-      $ref: '#/components/schemas/BlankSearch'
-    BlankUpdate:
-      type: object
-      properties:
-        blank:
-          type: string
-    BlankSearch:
-      allOf:
-        - $ref: '#/components/schemas/BlankPaginationQuery'
-        - $ref: '#/components/schemas/BlankConditionQuery'
-    BlankConditionFields:
-      type: object
-      x-min-properties: 1
-      properties:
-        id:
-          $ref: '#/components/schemas/SearchStringCondition'
-        updatedAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        createdAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        archived:
-          $ref: '#/components/schemas/SearchBooleanCondition'
-    BlankConditionQuery:
-      type: object
-      x-min-required:
-        - and
-        - or
-      properties:
-        and:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/BlankConditionFields'
-        or:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/BlankConditionFields'
-    BlankPaginationQuery:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/BlankPagination'
-    BlankPagination:
-      allOf:
-        - $ref: '#/components/schemas/Pagination'
-        - type: object
-          properties:
-            sort:
-              $ref: '#/components/schemas/BlankSort'
-    BlankSort:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Sorting'
-        updatedAt:
-          $ref: '#/components/schemas/Sorting'
-        createdAt:
-          $ref: '#/components/schemas/Sorting'
-        archived:
-          $ref: '#/components/schemas/Sorting'
-        blank:
-          $ref: '#/components/schemas/Sorting'
-    BlankCreateResponse:
+        userDealerId:
+          $ref: '#/components/schemas/ObjectID'
+        iat:
+          description: Issued at
+          type: number
+        exp:
+          description: Expiration time
+          type: number
+    UserCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
         - type: object
           properties:
             value:
-              $ref: '#/components/schemas/Blank'
-    BlankGetAllResponse:
+              $ref: '#/components/schemas/User'
+    UserGetAllResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
         - type: object
@@ -785,15 +604,15 @@ components:
               minItems: 0
               maxItems: 1000
               items:
-                $ref: '#/components/schemas/Blank'
-    BlankFindByIdResponse:
+                $ref: '#/components/schemas/User'
+    UserFindByIdResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
         - type: object
           properties:
             value:
-              $ref: '#/components/schemas/Blank'
-    BlankSearchResponse:
+              $ref: '#/components/schemas/User'
+    UserSearchResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
         - type: object
@@ -803,35 +622,79 @@ components:
               minItems: 0
               maxItems: 1000
               items:
-                $ref: '#/components/schemas/Blank'
-    BlankPatchResponse:
+                $ref: '#/components/schemas/User'
+    UserPatchResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
         - type: object
           properties:
             value:
-              $ref: '#/components/schemas/Blank'
-    BlankUpdateResponse:
+              $ref: '#/components/schemas/User'
+    UserUpdateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
         - type: object
           properties:
             value:
-              $ref: '#/components/schemas/Blank'
-    BlankArchiveResponse:
+              $ref: '#/components/schemas/User'
+    UserArchiveResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
         - type: object
           properties:
             value:
-              $ref: '#/components/schemas/Blank'
-    Blank:
+              $ref: '#/components/schemas/User'
+    User:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
         - type: object
+          required:
+            - email
+            - roles
           properties:
-            blank:
+            email:
+              $ref: '#/components/schemas/Email'
+            roles:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserRole'
+            refreshTokens:
+              type: array
+              items:
+                $ref: '#/components/schemas/RefreshToken'
+            password:
               type: string
+    RefreshToken:
+      type: object
+      required:
+        - token
+        - userAgentUuid
+        - userAgent
+      properties:
+        token:
+          $ref: '#/components/schemas/BearerToken'
+        userAgentUuid:
+          type: string
+        userAgent:
+          type: string
+    JwtTokenPayload:
+      type: object
+      required:
+        - userId
+        - roles
+      properties:
+        userId:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRole'
+    UserRole:
+      type: string
+      enum:
+        - Admin
+        - Member
+        - E2E
     UserCreate:
       type: object
       required:
@@ -986,137 +849,6 @@ components:
           $ref: '#/components/schemas/Sorting'
         password:
           $ref: '#/components/schemas/Sorting'
-    User:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - email
-            - roles
-          properties:
-            email:
-              $ref: '#/components/schemas/Email'
-            roles:
-              type: array
-              items:
-                $ref: '#/components/schemas/UserRole'
-            refreshTokens:
-              type: array
-              items:
-                $ref: '#/components/schemas/RefreshToken'
-            password:
-              type: string
-    RefreshToken:
-      type: object
-      required:
-        - token
-        - userAgentUuid
-        - userAgent
-      properties:
-        token:
-          $ref: '#/components/schemas/BearerToken'
-        userAgentUuid:
-          type: string
-        userAgent:
-          type: string
-    DecodedRefreshToken:
-      type: object
-      required:
-        - token
-        - userAgentUuid
-        - userAgent
-        - iat
-        - exp
-      properties:
-        token:
-          $ref: '#/components/schemas/BearerToken'
-        userAgentUuid:
-          type: string
-        userAgent:
-          type: string
-        userDealerId:
-          $ref: '#/components/schemas/ObjectID'
-        iat:
-          description: Issued at
-          type: number
-        exp:
-          description: Expiration time
-          type: number
-    JwtTokenPayload:
-      type: object
-      required:
-        - userId
-        - roles
-      properties:
-        userId:
-          type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserRole'
-    UserRole:
-      type: string
-      enum:
-        - Admin
-        - Member
-        - E2E
-    UserCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/User'
-    UserFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/User'
-    UserPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
     ExtensionModule:
       type: string
       enum:
@@ -1127,6 +859,20 @@ components:
       enum:
         - Fr
         - En
+    HealthcheckResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Healthcheck'
+    Healthcheck:
+      type: object
+      required:
+        - version
+      properties:
+        version:
+          type: string
     ManualString:
       type: object
       properties:
@@ -1627,20 +1373,6 @@ components:
           $ref: '#/components/schemas/ErrorData'
         pagination:
           $ref: '#/components/schemas/ResultHandlerPagination'
-    HealthcheckResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Healthcheck'
-    Healthcheck:
-      type: object
-      required:
-        - version
-      properties:
-        version:
-          type: string
     UploadResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -1660,6 +1392,12 @@ components:
         fileName:
           type: string
   responses:
+    SignupResponse:
+      description: Returns a boolean
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SignupResponse'
     LoginResponse:
       description: Returns a JWT Token and a Refresh Token on a successfull login
       content:
@@ -1684,48 +1422,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ResetPasswordResponse'
-    BlankCreateResponse:
-      description: Returns a Blank
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BlankCreateResponse'
-    BlankGetAllResponse:
-      description: Returns an array of Blank
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BlankGetAllResponse'
-    BlankFindByIdResponse:
-      description: Returns a Blank
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BlankFindByIdResponse'
-    BlankSearchResponse:
-      description: Returns a paginated array of Blank
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BlankSearchResponse'
-    BlankPatchResponse:
-      description: Returns a modified Blank
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BlankPatchResponse'
-    BlankUpdateResponse:
-      description: Returns an updated Blank
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BlankUpdateResponse'
-    BlankArchiveResponse:
-      description: Returns a ResultHandler with the archived Blank
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BlankArchiveResponse'
     UserCreateResponse:
       description: Returns a User
       content:
@@ -1768,6 +1464,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UserArchiveResponse'
+    HealthcheckResponse:
+      description: Returns a ResultHandler with the latest build version number
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HealthcheckResponse'
     SuccessResultResponse:
       description: Successful request (no content)
       content:
@@ -1810,12 +1512,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ResultHandlerInterface'
-    HealthcheckResponse:
-      description: Returns a ResultHandler with the latest build version number
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/HealthcheckResponse'
     UploadResponse:
       description: Returns an Upload
       content:
@@ -1823,6 +1519,13 @@ components:
           schema:
             $ref: '#/components/schemas/UploadResponse'
   requestBodies:
+    SignupRequestBody:
+      description: Body needed to signup
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SignupRequestBody'
     LoginRequestBody:
       description: Body needed to login
       required: true
@@ -1844,33 +1547,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ResetPasswordRequestBody'
-    BlankCreateRequestBody:
-      description: Body needed to create a Blank
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BlankCreate'
-    BlankSearchRequestBody:
-      description: Body needed to search Blanks
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BlankSearchRequestBody'
-    BlankPatchRequestBody:
-      description: Body needed to modify a Blank
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BlankPatch'
-    BlankUpdateRequestBody:
-      description: Body needed to update a Blank
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BlankUpdate'
     UserCreateRequestBody:
       description: Body needed to create a User
       required: true
@@ -1922,27 +1598,6 @@ components:
     IsUserArchived:
       name: isArchived
       description: Get archived User
-      in: query
-      required: false
-      schema:
-        type: boolean
-    BlankId:
-      name: id
-      description: Blank's Id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/ObjectID'
-    IsBlankDryRun:
-      name: isDryRun
-      description: Should this request be ran as a dry run (no save)
-      in: query
-      required: false
-      schema:
-        type: boolean
-    IsBlankArchived:
-      name: isArchived
-      description: Get archived Blank
       in: query
       required: false
       schema:
